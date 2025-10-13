@@ -1,0 +1,81 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.node-version'
+          cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run tests
+        run: |
+          pnpm lint
+          pnpm typecheck
+
+      - name: Build project
+        run: pnpm build
+
+      - name: Generate changelog
+        run: npx changelogithub
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Vue REPL Release ${{ github.ref }}
+
+            ## Changes
+            See [CHANGELOG.md](./CHANGELOG.md) for detailed changes.
+
+            ## Installation
+            ```bash
+            git clone https://github.com/Thomaslinsuanni/vue_code_sandbox.git
+            cd vue_code_sandbox
+            pnpm install
+            pnpm dev
+            ```
+          draft: false
+          prerelease: false
+
+      - name: Upload build artifacts to release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dist
+          asset_name: vue-repl-build.zip
+          asset_content_type: application/zip
