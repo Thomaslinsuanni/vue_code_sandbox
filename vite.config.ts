@@ -50,7 +50,7 @@ export default mergeConfig(base, {
       'vue/server-renderer',
     ],
   },
-  base: './',
+  base: '/vue_code_sandbox/',
   build: {
     target: 'esnext',
     minify: false,
