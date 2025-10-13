@@ -1,0 +1,75 @@
+{
+  // TypeScript 設定
+  "typescript.preferences.includePackageJsonAutoImports": "on",
+  "typescript.suggest.autoImports": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.inlayHints.parameterNames.enabled": "all",
+  "typescript.inlayHints.variableTypes.enabled": true,
+  "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
+
+  // Vue 設定
+  "vue.inlayHints.missingProps": true,
+  "vue.inlayHints.inlineHandlerLeading": true,
+  "vue.inlayHints.optionsWrapper": true,
+  "vue.complete.casing.tags": "kebab",
+  "vue.complete.casing.props": "camel",
+
+  // 禁用 Vetur（如果存在）
+  "vetur.validation.template": false,
+  "vetur.validation.script": false,
+  "vetur.validation.style": false,
+  "vetur.useWorkspaceDependencies": false,
+
+  // ESLint 設定
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue"
+  ],
+  "eslint.options": {
+    "extensions": [".js", ".jsx", ".ts", ".tsx", ".vue"]
+  },
+
+  // Prettier 設定
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // 檔案關聯
+  "files.associations": {
+    "*.vue": "vue"
+  },
+
+  // 編輯器設定
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+
+  // 排除檔案
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/.git": true
+  },
+
+  // 搜尋排除
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/.git": true,
+    "**/pnpm-lock.yaml": true
+  }
+}
