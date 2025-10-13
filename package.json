@@ -1,7 +1,7 @@
 {
-  "name": "@vue/repl",
-  "version": "4.7.0",
-  "description": "Vue component for editing Vue components",
+  "name": "vue-code-sandbox",
+  "version": "1.0.0",
+  "description": "Personal Vue REPL - A Vue 3 component for editing Vue components",
   "packageManager": "pnpm@10.14.0",
   "type": "module",
   "main": "dist/ssr-stub.js",
@@ -51,11 +51,14 @@
     "build": "vite build",
     "build-preview": "vite build -c vite.preview.config.ts",
     "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "typecheck": "vue-tsc --noEmit",
+    "test": "pnpm lint && pnpm typecheck",
+    "preview": "vite preview",
     "release": "bumpp --all",
-    "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
-    "prepublishOnly": "npm run build"
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm exec lint-staged --concurrent false"
@@ -67,14 +70,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vuejs/repl.git"
+    "url": "git+https://github.com/Thomaslinsuanni/vue_code_sandbox.git"
   },
-  "author": "Evan You",
+  "author": "Thomaslinsuanni",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/vuejs/repl/issues"
+    "url": "https://github.com/Thomaslinsuanni/vue_code_sandbox/issues"
   },
-  "homepage": "https://github.com/vuejs/repl#readme",
+  "homepage": "https://github.com/Thomaslinsuanni/vue_code_sandbox#readme",
   "devDependencies": {
     "@babel/standalone": "^7.28.2",
     "@babel/types": "^7.28.2",

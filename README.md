@@ -1,6 +1,6 @@
-# @vue/repl
+# Vue Code Sandbox
 
-Vue SFC REPL as a Vue 3 component.
+Personal Vue REPL - A powerful Vue 3 component playground for editing and testing Vue components in real-time.
 
 ## Basic Usage
 
