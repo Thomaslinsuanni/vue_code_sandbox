@@ -7,7 +7,7 @@ const active = defineModel<boolean>()
   <div class="wrapper" @click="active = !active">
     <span>{{ text }}</span>
     <div class="toggle" :class="[{ active: modelValue }]">
-      <div class="indicator" />
+      <div class="indicator"></div>
     </div>
   </div>
 </template>
