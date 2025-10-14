@@ -123,21 +123,8 @@ cd vue_code_sandbox
   - Prettier 或其他格式化工具
   - (選用) GitLens
 
-- 建議安裝套件若是在 clone 時有包含道 .vscode/ 此資料夾，只需要重啟 vscode 就會自動建議安裝組件
+- 建議安裝套件若是在 clone 時有包含到 /.vscode/ 此資料夾，只需要重啟 vscode 就會自動建議安裝組件
 
-- 建議設定（可放在 `.vscode/settings.json`）：
-
-```json
-{
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "eslint.packageManager": "pnpm",
-  "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  },
-  "volar.takeOverMode": true
-}
-```
 
 > 注意：若你曾安裝 Vetur，請停用或移除，以免與 Volar 衝突。
 
@@ -297,15 +284,3 @@ COPY . .
 RUN pnpm build-preview
 # 最終 artifact 位於 /app/dist
 ```
-
----
-
-## 12. 想要我幫忙的項目（可選）
-
-- 我可以把此檔加入 repo（`BUILD.md`）並開一個 branch、commit、push，或把說明加入 `README.md`。
-- 我可以在本地替你執行 `pnpm build-preview` 並回傳 `dist/` 列表（請允許我執行命令）。
-- 我可以檢查你的 workflow logs 或幫你修正 `vite.config.ts` 的 `base` 與 workflow 的上傳設定。
-
----
-
-如果要我直接把此文件新增到 repo，我可以現在就提交（新分支）並 push，你希望分支命名為什麼？（例如 `docs/build-guides`）
