@@ -4,7 +4,7 @@
     class="editor"
     @keydown.ctrl.s.prevent="emitChangeEvent"
     @keydown.meta.s.prevent="emitChangeEvent"
-  />
+  ></div>
 </template>
 
 <script setup lang="ts">

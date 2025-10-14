@@ -4,7 +4,13 @@
     "vue.vscode-typescript-vue-plugin",
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
-    "ms-vscode.vscode-typescript-next"
+    "ms-vscode.vscode-typescript-next",
+    "oderwat.indent-rainbow",
+    "PKief.material-icon-theme",
+    "vscode-icons-team.vscode-icons",
+    "eamodio.gitlens",
+    "mhutchie.git-graph",
+    "GitHub.vscode-pull-request-github"
   ],
   "unwantedRecommendations": ["octref.vetur"]
 }

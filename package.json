@@ -57,6 +57,7 @@
     "typecheck": "vue-tsc --noEmit",
     "test": "pnpm lint && pnpm typecheck",
     "preview": "vite preview",
+    "vscode:install-extensions": "node ./scripts/install-vscode-extensions.js",
     "release": "bumpp --all",
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
   },
@@ -117,9 +118,9 @@
     "typescript-eslint": "^8.39.0",
     "vite": "^7.0.6",
     "vite-plugin-dts": "^4.5.4",
-    "vscode-uri": "^3.1.0",
     "volar-service-typescript": "0.0.65",
-    "vue": "^3.5.18",
+    "vscode-uri": "^3.1.0",
+    "vue": "^3.5.22",
     "vue-tsc": "3.0.8"
   }
 }
