@@ -4,14 +4,19 @@
     class="editor"
     @keydown.ctrl.s.prevent="emitChangeEvent"
     @keydown.meta.s.prevent="emitChangeEvent"
-  />
+  ></div>
 </template>
 
 <script setup lang="ts">
 import type { ModeSpec, ModeSpecOptions } from 'codemirror'
-import { inject, onMounted, ref, watch, watchEffect } from 'vue'
-import type { ToRefs } from 'vue'
-import type { Props as ReplProps } from '../Repl.vue'
+import {
+  inject,
+  onMounted,
+  onWatcherCleanup,
+  useTemplateRef,
+  watch,
+  watchEffect,
+} from 'vue'
 import { debounce } from '../utils'
 import CodeMirror from './codemirror'
 import { injectKeyProps } from '../../src/types'
@@ -30,11 +35,8 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits<(e: 'change', value: string) => void>()
 
-const container = ref<HTMLElement | null>(null)
-const injected = inject(injectKeyProps)! as ToRefs<
-  Required<ReplProps & { autoSave: boolean }>
->
-const { autoResize, autoSave } = injected
+const el = useTemplateRef('container')
+const { autoResize, autoSave } = inject(injectKeyProps)!
 let editor: CodeMirror.Editor
 
 const emitChangeEvent = () => {
@@ -52,7 +54,7 @@ onMounted(() => {
         keyMap: 'sublime',
       }
 
-  editor = CodeMirror(container.value!, {
+  editor = CodeMirror(el.value!, {
     value: '',
     mode: props.mode,
     readOnly: props.readonly,
@@ -88,14 +90,10 @@ onMounted(() => {
 
   watch(
     autoSave,
-    (
-      autoSaveVal: boolean,
-      _old: boolean,
-      onCleanup: (fn: () => void) => void,
-    ) => {
-      if (autoSaveVal) {
+    (autoSave) => {
+      if (autoSave) {
         editor.on('change', emitChangeEvent)
-        onCleanup(() => editor.off('change', emitChangeEvent))
+        onWatcherCleanup(() => editor.off('change', emitChangeEvent))
       }
     },
     { immediate: true },
