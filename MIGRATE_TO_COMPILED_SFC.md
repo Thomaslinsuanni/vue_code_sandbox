@@ -9,7 +9,7 @@
 - 你只需要編譯 .vue 為 JS 供編輯器或 preview 使用（非最終打包/部署）。
 - 不需要改變現有部署流程（可在未來再把預編譯結果整合進 build）。
 
-## 總覽（高階步驟）
+## 總覽
 
 1. 新增一支 Node 腳本 `scripts/compile-sfc.js`，將 `src/**/*.vue` 轉為 `compiled/**/*.js`（或你指定的資料夾）。
 2. 在 `package.json` 新增 script：`compile:sfc`（與可選的 watch script）。
@@ -17,7 +17,7 @@
 4. 測試：執行 `pnpm run compile:sfc`，檢查 `compiled/` 檔案與 Editor 預覽能否讀取。
 5. 若通過，將變更 commit 到新分支，開 PR 並合併。
 
-## 詳細改動清單（檔案與目的）
+## 詳細改動清單
 
 - 新增 `scripts/compile-sfc.js`：核心編譯腳本，將 .vue 解析並匯出成 JS module。
 - 新增（或更新）`package.json` scripts：
