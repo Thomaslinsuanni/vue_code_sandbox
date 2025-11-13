@@ -13,12 +13,14 @@ const App = {
   setup() {
     const query = new URLSearchParams(location.search)
     const { importMap: builtinImportMap, vueVersion } = useVueImportMap({
+      // ensure proxy paths include the current base path so the iframe (srcdoc)
+      // can fetch them correctly when the app is served under a base like /vue_code_sandbox/
       runtimeDev: import.meta.env.PROD
         ? undefined
-        : `${location.origin}/src/vue-dev-proxy.js`,
+        : `${location.origin}${location.pathname}src/vue-dev-proxy.js`,
       serverRenderer: import.meta.env.PROD
         ? undefined
-        : `${location.origin}/src/vue-server-renderer-dev-proxy.js`,
+        : `${location.origin}${location.pathname}src/vue-server-renderer-dev-proxy.js`,
     })
     const store = (window.store = useStore(
       {
