@@ -15,10 +15,10 @@ const App = {
     const { importMap: builtinImportMap, vueVersion } = useVueImportMap({
       runtimeDev: import.meta.env.PROD
         ? undefined
-        : `${location.origin}/src/vue-dev-proxy`,
+        : `${location.origin}/src/vue-dev-proxy.js`,
       serverRenderer: import.meta.env.PROD
         ? undefined
-        : `${location.origin}/src/vue-server-renderer-dev-proxy`,
+        : `${location.origin}/src/vue-server-renderer-dev-proxy.js`,
     })
     const store = (window.store = useStore(
       {
