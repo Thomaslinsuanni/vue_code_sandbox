@@ -20,12 +20,14 @@ const { store } = inject(injectKeyProps)!
 const previewRef = useTemplateRef('preview')
 const modes = computed(() => {
   const outputModes: OutputModes[] = ['preview']
-  if (props.showCompileOutput) {
+
+  if (!props.showCompileOutput) {
     outputModes.push('js', 'css', 'ssr')
   }
-  if (props.ssr && props.showSsrOutput) {
+  if (!props.ssr && !props.showSsrOutput) {
     outputModes.push('ssr output')
   }
+
   return outputModes
 })
 
@@ -40,13 +42,29 @@ watchEffect(() => {
   }
 })
 
+// Editor value mapping:
+// - 'html' shows the original source for editing (.vue)
+// - 'js' | 'css' | 'ssr' show compiled outputs (read-only)
+const editorValue = computed(() => {
+  const active = store.value.activeFile
+  if (!active) return ''
+  if (mode.value === 'ssr') return active.code || ''
+  // compiled may not include every key; guard access
+  return (active.compiled as Record<string, string>)[mode.value] || ''
+})
+
 const showSourceMap = computed(() => {
-  return props.showOpenSourceMap && (mode.value === 'js' || mode.value === 'ssr')
+  return (
+    props.showOpenSourceMap && (mode.value === 'js' || mode.value === 'ssr')
+  )
 })
 
 function openSourceMap() {
-  const { clientMap, ssrMap } = store.value.activeFile.compiled
-  window.open(mode.value === 'js' ? clientMap : ssrMap)
+  const compiled = store.value.activeFile.compiled || ({} as any)
+  const clientMap = compiled.clientMap
+  const ssrMap = compiled.ssrMap
+  if (mode.value === 'js' && clientMap) window.open(clientMap)
+  else if (mode.value === 'ssr' && ssrMap) window.open(ssrMap)
 }
 
 function reload() {
@@ -77,9 +95,9 @@ defineExpose({ reload, previewRef })
     />
     <props.editorComponent
       v-else-if="mode !== 'preview'"
-      readonly
+      :readonly="!(mode === 'ssr' || mode === 'js')"
       :filename="store.activeFile.filename"
-      :value="store.activeFile.compiled[mode]"
+      :value="editorValue"
       :mode="mode"
     />
   </div>

@@ -1,5 +1,6 @@
 {
   "recommendations": [
+    "MS-CEINTL.vscode-language-pack-zh-hant",
     "vue.volar",
     "vue.vscode-typescript-vue-plugin",
     "esbenp.prettier-vscode",
@@ -7,7 +8,6 @@
     "ms-vscode.vscode-typescript-next",
     "oderwat.indent-rainbow",
     "PKief.material-icon-theme",
-    "vscode-icons-team.vscode-icons",
     "eamodio.gitlens",
     "mhutchie.git-graph",
     "GitHub.vscode-pull-request-github"
